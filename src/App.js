@@ -1,4 +1,9 @@
 import { useState } from "react";
+
+import List from "./components/List";
+import ListItem from "./components/ListItem";
+import Button from "./components/Button";
+import Input from "./components/Input";
 import "./App.css";
 import { todos as data } from "./api/data";
 
@@ -23,27 +28,25 @@ function App() {
   return (
     <div className="App">
       <div className="input-container">
-        <input
+        <Input
           value={input}
-          onChange={(e) => {
-            setInput(e.target.value);
-          }}
+          handleChange={setInput}
           placeholder="enter your task.."
         />
-        <Button name="Save" handleClcik={handleSave} />
+        <Button name="Save" handleClick={handleSave} />
         <h2>{input}</h2>
       </div>
       <div className="list-container">
-        <ul className="list">
-          {todos.map((todo) => {
+        <ul>
+          {todos.map((todo, index) => {
             return (
-              <li key={`todo-${todo.id}`}>
-                {todo.id}-{todo.title}
-                <Button name="Delete" handleClcik={handleDelete} />
-              </li>
+              <ListItem key={`todo-${todo.id}`} todo={todo}>
+                <Button name="get" handleClick={() => handleDelete(todo.id)} />
+              </ListItem>
             );
           })}
         </ul>
+        <Button name="delete" />
       </div>
     </div>
   );
