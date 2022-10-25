@@ -6,7 +6,7 @@ function App() {
   const [todos, setTodos] = useState(data);
   const [input, setInput] = useState("");
 
-  const handleClick = () => {
+  const handleSave = () => {
     setTodos((prev) => {
       const count = prev.length + 1;
       return [...prev, { title: input, id: count }];
@@ -30,17 +30,16 @@ function App() {
           }}
           placeholder="enter your task.."
         />
-        <button onClick={handleClick}>Save</button>
+        <Button name="Save" handleClcik={handleSave} />
         <h2>{input}</h2>
       </div>
       <div className="list-container">
-        <Button name="test" style={{ color: "purple" }} />
         <ul className="list">
           {todos.map((todo) => {
             return (
               <li key={`todo-${todo.id}`}>
                 {todo.id}-{todo.title}
-                <button onClick={() => handleDelete(todo.id)}>Delete</button>
+                <Button name="Delete" handleClcik={handleDelete} />
               </li>
             );
           })}
@@ -48,10 +47,6 @@ function App() {
       </div>
     </div>
   );
-}
-
-function Button({ name, style }) {
-  return <button style={Object.assign({}, style)}>{name}</button>;
 }
 
 export default App;
